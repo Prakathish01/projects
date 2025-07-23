@@ -1,0 +1,124 @@
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height:65px;
+  margin:0;
+  top:0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  background-color: white;
+  border-bottom-color: rgb(228, 224, 224);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+.left-container{ 
+  display: flex; 
+  width: 200px;
+  height:65px;
+  align-items: center;
+  margin-left: 10px;;
+}
+.hamburger-menu{
+  height: 30px;
+  margin-left: 20px;
+  margin-right: 20px
+}
+.youtube-logo{
+
+  height: 30px;
+ 
+}
+.middle-container{
+  display: flex;
+  flex: 1;
+  height:65px;
+  margin-left: 75px;
+  margin-right: 50px;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+}
+
+.search-bar{
+  margin-left:15px;
+  display: flex;
+  height: 30px;
+  flex:1;
+  max-width: 400px;
+  font-size: 15px;
+  border-width: 1px;
+  border-color: rgb(192,192,192);
+  border-radius:3px;
+  min-width: 20px;;
+  flex-shrink: 1;
+}
+.search-bar::placeholder {
+  font-family: Roboto, Arial;
+  padding-left: 7px;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+.search-bar:focus {
+  outline: none;
+  border-color: rgb(192,192,192);
+}
+
+.search-button{
+  background-color: rgb(240,240,240);
+  margin-left: -2px;
+  height :30px;
+  width:40px;
+  border-radius: 2px;
+  border:1px solid rgb(192,192,192);
+  border-color: rgb(192,192,192);
+  outline: none;
+}
+.search-icon{
+  height: 20px;
+  margin-top: 3px;
+
+}
+.mic-button{
+  background-color: rgb(240,240,240);
+  height :33px;
+  width:40px;
+  margin-left: 5px;
+  border: 0;
+  border-radius: 21px ;
+}
+.mic-icon{
+  height: 20px;
+  margin-top: 3px;
+}
+
+.right-container {
+  display: flex;
+  width: 150px;
+  align-items: center;
+  margin-right: 10px;
+  justify-content: space-evenly;
+  flex-shrink: 0;
+}
+
+
+.upload-icon{
+  height: 30px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.youtube-apps{
+  margin-right: 10px;
+  height: 30px;
+}
+.notifications{
+  height: 30px;
+  margin-right: 10px;
+
+}
+.profile-pic{
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+
+}

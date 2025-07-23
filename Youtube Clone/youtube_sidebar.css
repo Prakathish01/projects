@@ -1,0 +1,32 @@
+.sidebar{
+  position:fixed;
+  left:0;
+  bottom:0;
+  top: 65px;
+  width: 70px;
+  background-color: white;
+  border-right-color: rgb(204, 202, 202);
+  border-right-style: solid;
+  border-right-width: 1px;
+}
+.sidebar_functions{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  height: 70px;
+  width: 69px;
+  transition:opacity 0.2s;
+}
+.sidebar_functions:hover{
+  background-color: rgb(203, 200, 200);
+  cursor: pointer;
+} 
+.sidebar-icon{
+  height: 30px;
+  width: 30px;
+}
+.sidebar-icon-msge{
+  font-size: 10px;
+}
