@@ -1,47 +1,90 @@
+body{
+  margin:0px;
+}
 .header{
-  display: flex;
+  display:flex;
   justify-content: space-between;
-  background-color: pink;
-}
-.logo-container{
-  width: 75px;
-  height:75px;
-}
-.search-container {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  width: 500px;
-  
+  background-color: rgb(155, 155, 155);
+  border: 2px solid;
+  border-color: rgb(0, 0, 0);
+  height: 70px;
 }
-input{
-  width:350px;
-}
-
-.nav-items > ul {
+.nav-items ul{
   display: flex;
+  justify-content: space-evenly;
+  list-style-type: none;
+  margin-right: 20px;
+}
+.nav-items ul li{
+  margin: 5px 10px;
   font-size: 20px;
-
 }
-.nav-items > ul > li {
-  margin: 0 10px;
-  list-style: none;
-  cursor: pointer;
-  margin-right: 30px;
+.sideSpaceRight{
+  position: fixed;
+  top: 74px;
+  right: 0px;
+  bottom: 0px;
+  width: 160px;
+  border-left: 1px solid black;
+  background-color: aliceblue;
+}
+.sideSpaceLeft{
+  position: fixed;
+  top: 74px;
+  Left: 0px;
+  bottom: 0px;
+  width: 160px;
+  border-right: 1px solid black;
+  background-color: aliceblue;
 }
 
+.body{
+  padding-left: 162px;
+  padding-right: 162px;
+}
+.top-rated-btn{
+  margin-left: 10px;
+}
 .res-container{
-  display: inline-block;
-  height: 300px;
+  display:flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.res-card{
   width: 150px;
-  background-color: rgb(186, 186, 186);
-  justify-content: space-between;
-  margin: 20px 20px;
-  border: none;
-}
-.res-container:hover{
-  size: 1.1em;
-  cursor: pointer;
+  height:auto;
   border: 1px solid black;
+  padding: 5px;
+  margin: 10px 10px;
+  transition: all 0.3s ease-in-out;
 }
+.res-card:hover{
+  box-shadow: 0px 0px 10px black;
+  cursor: pointer;
+}
+.res-card img{
+  width: 100%;
+  height: 125px;
+  justify-self: center;
+  object-fit: cover;
+  object-position: center;
+}
+.res-card p{
+  margin-top: 3px;
+  font-family: sans-serif;
+}
+.shimmer-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-left: 162px;
+  padding-right: 162px;
 
+}
+.shimmer-card{
+  margin: 10px 10px;
+  width:150px;
+  height: 300px;
+  background-color: #f0f0f0;
+}
