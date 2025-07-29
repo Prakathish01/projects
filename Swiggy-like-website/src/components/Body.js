@@ -3,6 +3,7 @@ import {SideSpaceRight,SideSpaceLeft} from "./SideSpace";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Shimmer } from "./Shimmer";
+import { Link } from "react-router";
 
 
 export const Body = () =>{
@@ -15,8 +16,7 @@ export const Body = () =>{
   },[])
 
   const fetchData = async ()=>{
-    const data = await fetch(
-    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9817654&lng=80.2431646&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9817654&lng=80.2431646&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
     const json = await data.json();
     setListOFRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     setFilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
@@ -54,9 +54,14 @@ export const Body = () =>{
     <div className="res-container">
       <>
         {filteredRestaurant.map((restaurant)=>(
-          <RestaurantCard  key={restaurant.info.id} resData ={restaurant} />
+          <Link 
+            key={restaurant.info.id}
+            to={"/restaurant/" + restaurant.info.id}
+          >
+            <RestaurantCard   resData ={restaurant} />
+          </Link>
         ))}
-        <SideSpaceRight/>
+        <SideSpaceRight/>    
         <SideSpaceLeft/>
       </>
     </div>
