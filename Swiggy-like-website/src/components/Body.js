@@ -4,19 +4,22 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router";
+import { SWIGGY_API } from "../utils/constants";
+import { useOnlineStatus } from "../utils/useOnlineStatus";
 
 
 export const Body = () =>{
   const [listOFRestaurant,setListOFRestaurant] = useState([]);
   const [filteredRestaurant,setFilteredRestaurant] =useState([]);
   const [searchResult,setSearchResult] = useState("");
+  const onlineStatus = useOnlineStatus();
 
   useEffect(()=>{
     fetchData()
   },[])
 
   const fetchData = async ()=>{
-    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9817654&lng=80.2431646&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const data = await fetch(SWIGGY_API);
     const json = await data.json();
     setListOFRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     setFilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
@@ -29,6 +32,15 @@ export const Body = () =>{
         <SideSpaceRight/>
         <SideSpaceLeft/>
       </div>
+    )
+  }; 
+  if (!onlineStatus){
+    return (
+    <>
+      <SideSpaceRight/>
+      <SideSpaceLeft/>
+      <h1 style={{display:"flex" ,alignItems:"center",justifyContent:"center"}}>Check your internet connection</h1>
+    </>
     )
   };
   return (
