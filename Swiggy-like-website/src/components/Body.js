@@ -4,6 +4,10 @@ import { useState ,useEffect} from "react";
 import { SWIGGY_API } from "../utils/constants";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router";
+<<<<<<< HEAD
+=======
+import { SWIGGY_API } from "../utils/constants";
+>>>>>>> be20052fcc5cf5933555dcde04d88b718da95a40
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 
 
@@ -11,6 +15,7 @@ export const Body = () =>{
   const [listOFRestaurant,setListOFRestaurant] = useState([]);
   const [filteredRestaurant,setFilteredRestaurant] =useState([]);
   const [searchResult,setSearchResult] = useState("");
+  const onlineStatus = useOnlineStatus();
 
   useEffect(()=>{
     fetchData()
@@ -30,6 +35,15 @@ export const Body = () =>{
         <SideSpaceRight/>
         <SideSpaceLeft/>
       </div>
+    )
+  }; 
+  if (!onlineStatus){
+    return (
+    <>
+      <SideSpaceRight/>
+      <SideSpaceLeft/>
+      <h1 style={{display:"flex" ,alignItems:"center",justifyContent:"center"}}>Check your internet connection</h1>
+    </>
     )
   };
   const onlineStatus =useOnlineStatus();
