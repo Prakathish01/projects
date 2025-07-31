@@ -1,9 +1,10 @@
 import { RestaurantCard } from "./RestaurantCard";
 import {SideSpaceRight,SideSpaceLeft} from "./SideSpace";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState ,useEffect} from "react";
+import { SWIGGY_API } from "../utils/constants";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router";
+import { useOnlineStatus } from "../utils/useOnlineStatus";
 
 
 export const Body = () =>{
@@ -16,10 +17,10 @@ export const Body = () =>{
   },[])
 
   const fetchData = async ()=>{
-    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9817654&lng=80.2431646&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const data = await fetch(SWIGGY_API);
     const json = await data.json();
-    setListOFRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFilteredRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    const restaurantPath = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    setFilteredRestaurant(restaurantPath);
 
   }
   if (listOFRestaurant.length === 0)  {
@@ -30,6 +31,14 @@ export const Body = () =>{
         <SideSpaceLeft/>
       </div>
     )
+  };
+  const onlineStatus =useOnlineStatus();
+  if (onlineStatus === false){
+    <>
+      <h1>Oops, looks like you are offline</h1>
+      <SideSpaceRight/>
+      <SideSpaceLeft/>
+    </>
   };
   return (
   <div className="body">
