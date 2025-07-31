@@ -4,10 +4,6 @@ import { useState ,useEffect} from "react";
 import { SWIGGY_API } from "../utils/constants";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router";
-<<<<<<< HEAD
-=======
-import { SWIGGY_API } from "../utils/constants";
->>>>>>> be20052fcc5cf5933555dcde04d88b718da95a40
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 
 
@@ -26,6 +22,7 @@ export const Body = () =>{
     const json = await data.json();
     const restaurantPath = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setFilteredRestaurant(restaurantPath);
+    setListOFRestaurant(restaurantPath);
 
   }
   if (listOFRestaurant.length === 0)  {
@@ -45,14 +42,6 @@ export const Body = () =>{
       <h1 style={{display:"flex" ,alignItems:"center",justifyContent:"center"}}>Check your internet connection</h1>
     </>
     )
-  };
-  const onlineStatus =useOnlineStatus();
-  if (onlineStatus === false){
-    <>
-      <h1>Oops, looks like you are offline</h1>
-      <SideSpaceRight/>
-      <SideSpaceLeft/>
-    </>
   };
   return (
   <div className="body">
