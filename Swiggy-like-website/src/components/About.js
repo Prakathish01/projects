@@ -1,13 +1,12 @@
-import React from 'react'
-import UserClass from './UserClass'
+import UserClass from "./UserClass";
 
 const About = () => {
   return (
     <>
-      <div>About</div>
-      <UserClass name={"Kumar"} location={"kumbakonam"}/>
+      <div className="bg-red-500">About</div>
+      <UserClass name={"Kumar"} location={"kumbakonam"} />
     </>
   );
-}
+};
 
 export default About;

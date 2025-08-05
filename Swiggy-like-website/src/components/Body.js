@@ -1,81 +1,111 @@
-import { RestaurantCard } from "./RestaurantCard";
-import {SideSpaceRight,SideSpaceLeft} from "./SideSpace";
-import { useState ,useEffect} from "react";
+import { RestaurantCard, WithPromotedLabel } from "./RestaurantCard";
+import { SideSpaceRight, SideSpaceLeft } from "./SideSpace";
+import { useState, useEffect } from "react";
 import { SWIGGY_API } from "../utils/constants";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 
-
-export const Body = () =>{
-  const [listOFRestaurant,setListOFRestaurant] = useState([]);
-  const [filteredRestaurant,setFilteredRestaurant] =useState([]);
-  const [searchResult,setSearchResult] = useState("");
+export const Body = () => {
+  const [listOFRestaurant, setListOFRestaurant] = useState([]);
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+  const [searchResult, setSearchResult] = useState("");
   const onlineStatus = useOnlineStatus();
 
-  useEffect(()=>{
-    fetchData()
-  },[])
+  const RestaurantPromoted = WithPromotedLabel(RestaurantCard);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const fetchData = async ()=>{
+  const fetchData = async () => {
     const data = await fetch(SWIGGY_API);
     const json = await data.json();
-    const restaurantPath = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    const restaurantPath =
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
     setFilteredRestaurant(restaurantPath);
     setListOFRestaurant(restaurantPath);
-
-  }
-  if (listOFRestaurant.length === 0)  {
+  };
+  if (listOFRestaurant.length === 0) {
     return (
       <div>
-        <Shimmer/>
-        <SideSpaceRight/>
-        <SideSpaceLeft/>
+        <Shimmer />
+        <SideSpaceRight />
+        <SideSpaceLeft />
       </div>
-    )
-  }; 
-  if (!onlineStatus){
+    );
+  }
+  if (!onlineStatus) {
     return (
-    <>
-      <SideSpaceRight/>
-      <SideSpaceLeft/>
-      <h1 style={{display:"flex" ,alignItems:"center",justifyContent:"center"}}>Check your internet connection</h1>
-    </>
-    )
-  };
-  return (
-  <div className="body">
-    <div className="res-options">
-      <input type="text" placeholder="Search" value={searchResult} 
-        onChange={(e)=>{setSearchResult(e.target.value)}}
-        /> 
-      <button className="search-Button"
-        onClick={()=>{
-          const filteredList = listOFRestaurant.filter((res)=>
-            res.info.name.toLowerCase().includes(searchResult.toLowerCase())
-          )
-          setFilteredRestaurant(filteredList);
-        }}  
-        >Search</button>
-      <button className="top-rated-btn"
-        onClick={()=>{
-          const filteredList =listOFRestaurant.filter((res) => (res.info.avgRating) >4);
-          setListOFRestaurant(filteredList)
-        }}> Top Rated Restaurant </button>
-    </div>
-    <div className="res-container">
       <>
-        {filteredRestaurant.map((restaurant)=>(
-          <Link 
-            key={restaurant.info.id}
-            to={"/restaurant/" + restaurant.info.id}
-          >
-            <RestaurantCard   resData ={restaurant} />
-          </Link>
-        ))}
-        <SideSpaceRight/>    
-        <SideSpaceLeft/>
+        <SideSpaceRight />
+        <SideSpaceLeft />
+        <h1
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          Check your internet connection
+        </h1>
       </>
+    );
+  }
+  return (
+    <div className="pt-[70px] pl-[164px] pr-[164px]">
+      <div className="flex justify-center mt-2 items-center h-5 w-auto ">
+        <input
+          className="rounded-xl px-3 py-1"
+          type="text"
+          placeholder="Search"
+          value={searchResult}
+          onChange={(e) => {
+            setSearchResult(e.target.value);
+          }}
+        />
+        <button
+          className="search-Button ml-2 bg-[#ffa647] text-white px-3 py-1 rounded-xl cursor-pointer"
+          onClick={() => {
+            const filteredList = listOFRestaurant.filter((res) =>
+              res.info.name.toLowerCase().includes(searchResult.toLowerCase()),
+            );
+            setFilteredRestaurant(filteredList);
+          }}
+        >
+          Search
+        </button>
+        <button
+          className="ml-2 bg-[#ffa647] text-white px-3 py-1 rounded-xl cursor-pointer"
+          onClick={() => {
+            const filteredList = listOFRestaurant.filter(
+              (res) => res.info.avgRating > 4,
+            );
+            setFilteredRestaurant(filteredList);
+          }}
+        >
+          {" "}
+          Top Rated Restaurant{" "}
+        </button>
+      </div>
+      <div className="flex justify-evenly flex-wrap">
+        <>
+          {filteredRestaurant.map((restaurant) => (
+            <Link
+              key={restaurant.info.id}
+              to={"/restaurant/" + restaurant.info.id}
+            >
+              {restaurant.info.aggregatedDiscountInfoV3 ? (
+                <RestaurantPromoted resData={restaurant} />
+              ) : (
+                <RestaurantCard resData={restaurant} />
+              )}
+            </Link>
+          ))}
+          <SideSpaceRight />
+          <SideSpaceLeft />
+        </>
+      </div>
     </div>
-  </div>
-)};
+  );
+};
