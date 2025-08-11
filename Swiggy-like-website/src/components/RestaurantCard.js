@@ -10,6 +10,7 @@ export const RestaurantCard = ({ resData }) => {
     deliveryTime,
     aggregatedDiscountInfoV3,
   } = resData?.info || {};
+  console.log(resData);
   const commonTextStyle = "mt-[3px] font-sans";
   return (
     <div className="relative w-[150px] h-auto border border-solid border-black p-1.5 m-2.5 transition-all duration-300 ease-in-out hover:shadow-[0_0_10px_black] hover:cursor-pointer">

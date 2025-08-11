@@ -1,16 +1,19 @@
 import { RestaurantCard, WithPromotedLabel } from "./RestaurantCard";
 import { SideSpaceRight, SideSpaceLeft } from "./SideSpace";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { SWIGGY_API } from "../utils/constants";
 import { Shimmer } from "./Shimmer";
 import { Link } from "react-router";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
+// import { UserContext } from "../utils/UserContext";
 
 export const Body = () => {
   const [listOFRestaurant, setListOFRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchResult, setSearchResult] = useState("");
   const onlineStatus = useOnlineStatus();
+
+  // const { loggedInId, setUserName } = useContext(UserContext);
 
   const RestaurantPromoted = WithPromotedLabel(RestaurantCard);
   useEffect(() => {
@@ -87,6 +90,8 @@ export const Body = () => {
           {" "}
           Top Rated Restaurant{" "}
         </button>
+        {/* <label>User :</label> */}
+        {/* <input type="text" className="p-1 cursor-pointer border border-[#c6c6c6] " value={loggedInId} onChange={(e) => (e.target.value)} /> */}
       </div>
       <div className="flex justify-evenly flex-wrap">
         <>

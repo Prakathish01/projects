@@ -1,13 +1,15 @@
 import { ItemsSlot } from "./ItemsSlot";
 import { useState } from "react";
 
-export const RestaurantCategory = ({data}) =>{
-  const [showItems,setShowItems] = useState(false);
+export const RestaurantCategory = ({data,showItems,setShowItems}) =>{
+  // const [showItems,setShowItems] = useState(false);
   const [arrowSide,setArrowSide] = useState("🔻")
   const handleClick = () => (
     <>
-      {setShowItems(!showItems)}
-      {setArrowSide(arrowSide === "🔻" ? "🔺" : "🔻")}
+      {/* {setShowItems(!showItems)} */}
+      {setShowItems()}
+      {setArrowSide((prev) =>(prev ==="🔻"?  "🔺" : "🔻"))}
+      {/* {setArrowSide(arrowSide === "🔻" ? "🔺" : "🔻")} */}
     </>
   );
   return (
@@ -17,7 +19,7 @@ export const RestaurantCategory = ({data}) =>{
         <span >{arrowSide}</span>
       </div>
       <div>
-        {showItems && < ItemsSlot items ={data}/>}
+        {showItems && < ItemsSlot items ={data?.itemCards}/>} 
       </div>
     </div>
   )
